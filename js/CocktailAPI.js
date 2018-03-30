@@ -41,4 +41,47 @@ class CocktailAPI{
             recipe
         }
     }
+
+    //Retrieves all categories from REST API
+
+    async getCategories(){
+        const apiResponse = await fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list');
+
+        //wait for the response and return json
+
+        const categories = await apiResponse.json();
+
+        return{
+            categories
+        }
+    }
+
+    //Get Drinks by category
+    async getDrinksByCategory(category){
+        //Search by category
+        const apiResponse = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`);
+
+        //Retuern a json response
+
+        const cocktails = await apiResponse.json();
+
+        return {
+            cocktails
+        }
+    }
+
+
+    //Get Alcohol or non Alcohol Drinks
+    async getDrinksByAlcohol(term){
+        //Search by Alcohol
+        const apiResponse = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=${term}`);
+
+        //Retuern a json response
+
+        const cocktails = await apiResponse.json();
+
+        return {
+            cocktails
+        }
+    }
 }
